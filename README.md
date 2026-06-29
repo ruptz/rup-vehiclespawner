@@ -2,16 +2,20 @@
 
 A modern, intuitive vehicle spawner menu for FiveM servers with category management and add-on vehicle support.
 
-![Menu Preview](./web/images/menu_preview.png)
+![Menu Preview](./web/public/images/menu_preview.png)
+
+# Video Preview 🎥
+[![Preview](https://img.youtube.com/vi/-PLf3GjX5Ao/maxresdefault.jpg)](https://youtu.be/-PLf3GjX5Ao)
 
 ## Features 🌟
-- 🗂️ **Category System**: Organized vehicle classes (Cars, Helicopters, Planes, etc.)
+- 🗂️ **Category System**: Organized vehicle classes (Cars, Helicopters, Planes, Add-On Vehicles etc.)
 - 🔍 **Instant Search**: Find vehicles by name in real-time
 - 🎨 **Dark UI**: Clean, modern interface with dark theme
 - 🔑 **Framework Support**: QBcore, QBX, and standalone configurations
 - 🔒 **Permission System**: Admin-restricted access
 - 🖼️ **Custom Vehicle Images**: Support for add-on vehicle previews
 - ⚡ **Optimized Performance**: Smooth animations and lazy loading
+- 🚙 **Spawn Options**: RGB color picker & max mods.
 
 ## Dependencies 📦
 - [ox_lib](https://github.com/overextended/ox_lib) (Required)
@@ -39,7 +43,7 @@ Config = {
 ```
 
 ## Add-On Vehicle Images 🖼️
-1. Open the folder: `web/images/`
+1. Open the folder: `web/build/images/`
 2. Add images named exactly as your vehicle models (e.g.: `police.png`)
 3. Supported formats: PNG
 4. Recommended size: `512x512px` (will auto-scale)
@@ -49,10 +53,11 @@ Example structure:
 resources/
 └── rup-vehiclespawner/
     └── web/
-        └── images/
-            ├── police.png
-            ├── adder.png
-            └── fallback.png
+        └── build/
+            └── images/
+                ├── police.png
+                ├── adder.png
+                └── fallback.png
 ```
 
 ## Discord License Types 🔐
@@ -68,6 +73,17 @@ Contributions welcome! Please follow these steps:
 1. Fork the repository
 2. Create a pull request
 4. Ill review 0-0
+
+## Developers 🛠️
+
+The UI is a **React + TypeScript + Vite + Tailwind** app. Source lives in `web/src/`.
+
+```bash
+cd web
+npm install
+npm run dev
+npm run build
+```
 
 ## License 📄
 MIT License - See [LICENSE](LICENSE) for details

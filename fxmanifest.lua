@@ -6,10 +6,11 @@ author 'Ruptz'
 description 'Vehicle Spawner'
 version '1.0.2'
 
-ui_page 'web/index.html'
+ui_page 'web/build/index.html'
 
 shared_scripts {
 	'config.lua',
+	'shared/stock_vehicles.lua',
 	'@ox_lib/init.lua',
 }
 
@@ -22,6 +23,6 @@ server_scripts {
 }
 
 files {
-	'web/*',
-	'web/**/*.png'
+	'web/build/index.html',
+	'web/build/**/*',
 }

@@ -1,5 +1,12 @@
+local function getDisplayName(model)
+    local text = GetLabelText(GetDisplayNameFromVehicleModel(GetHashKey(model)))
+    if not text or text == '' or text == 'NULL' then
+        return model
+    end
+    return text
+end
+
 local function fetchVehicleModels()
-    local vehicleModels = {}
     local models = GetAllVehicleModels()
 
     -- Vehicle categories
@@ -30,6 +37,7 @@ local function fetchVehicleModels()
     }
 
     local categorizedVehicles = {}
+    local addonCount = 0
 
     for _, model in ipairs(models) do
         local class = GetVehicleClassFromName(model) --[[ Grab all vehicle models in game, including add-on! ]]
@@ -39,8 +47,21 @@ local function fetchVehicleModels()
             categorizedVehicles[className] = {}
         end
 
-        --[[ Insert all vehicles in a table, might be a better way but it works and I like it more 0-0 ]]
-        table.insert(categorizedVehicles[className], { model = model})
+        local entry = { model = model, label = getDisplayName(model) }
+        table.insert(categorizedVehicles[className], entry)
+
+        --[[ Add-on vehicles: any model not in base game gets added into there own category! I know its been a year chill :P]]
+        if not StockVehicles[string.lower(model)] then
+            if not categorizedVehicles["Add-on"] then
+                categorizedVehicles["Add-on"] = {}
+            end
+            table.insert(categorizedVehicles["Add-on"], entry)
+            addonCount = addonCount + 1
+        end
+    end
+
+    if Config.Debug then
+        print(('Found ^2%d^7 add-on vehicles out of ^2%d^7 total models'):format(addonCount, #models))
     end
 
     SendNUIMessage({
@@ -49,8 +70,28 @@ local function fetchVehicleModels()
     })
 end
 
+--[[ Speed omeegee ]]
+local function applyMaxTuning(vehicle)
+    SetVehicleModKit(vehicle, 0)
+    for _, modType in ipairs({ 11, 12, 13, 15, 16 }) do
+        local count = GetNumVehicleMods(vehicle, modType)
+        if count > 0 then
+            SetVehicleMod(vehicle, modType, count - 1, false)
+        end
+    end
+    ToggleVehicleMod(vehicle, 18, true) --[[ turbo pshhhhhhhh ]]
+end
+
+--[[ Paint Jobs ]]
+local function applyCustomColour(vehicle, primary, secondary)
+    SetVehicleModKit(vehicle, 0)
+    SetVehicleCustomPrimaryColour(vehicle, primary.r or 255, primary.g or 255, primary.b or 255)
+    SetVehicleCustomSecondaryColour(vehicle, secondary.r or 0, secondary.g or 0, secondary.b or 0)
+end
+
 RegisterNUICallback('spawnVehicle', function(data, cb)
     local model = data.model
+    local options = data.options or {}
 
     local loaded = lib.requestModel(model, 10000)
     if not loaded then
@@ -67,6 +108,11 @@ RegisterNUICallback('spawnVehicle', function(data, cb)
         if DoesEntityExist(veh) then
             DeleteVehicle(veh)
         end
+    end
+
+    if options.maxTuned then applyMaxTuning(vehicle) end
+    if options.applyColor and options.primary and options.secondary then
+        applyCustomColour(vehicle, options.primary, options.secondary)
     end
 
     if Config.Warp then SetPedIntoVehicle(ped, vehicle, -1) end

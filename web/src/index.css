@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Special+Gothic+Expanded+One&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', system-ui, Arial, sans-serif;
+  --font-display: 'Special Gothic Expanded One', Arial, sans-serif;
+  --color-bg: #202124;
+  --color-panel: #303134;
+  --color-panel2: #3c4043;
+  --color-accent: #8ab4f8;
+  --color-accent-soft: rgba(138, 180, 248, 0.12);
+  --color-success: #81c995;
+  --color-line: #5f6368;
+  --color-muted: #9aa0a6;
+  --color-text: #e8eaed;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: transparent;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #5f6368;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777b80;
+}

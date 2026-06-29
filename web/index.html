@@ -1,42 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Rup Vehicle Spawner</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-      <link rel="stylesheet" href="style.css">
-   </head>
-   <body>
-      <div class="dashboard-container">
-         <div class="dashboard-header">
-            <div class="search-container">
-               <i class="fas fa-search search-icon"></i>
-               <input type="text" id="searchInput" placeholder="Search vehicles..." class="search-input">
-            </div>
-            <button class="close-btn" onclick="closeUI()">
-            <i class="fas fa-times"></i>
-            </button>
-         </div>
-         <div class="dashboard-content">
-            <div class="dashboard-sidebar">
-               <div class="sidebar-header">
-                  <div class="sidebar-title">
-                     <i class="fas fa-bars-filter"></i>
-                     <span>Categories</span>
-                  </div>
-               </div>
-               <div id="category-list" class="category-items"></div>
-            </div>
-            <div class="dashboard-main">
-               <div class="main-header">
-                  <h2 id="current-category"><i class="fas fa-tag"></i> <span>All Vehicles</span></h2>
-                  <div class="results-count" id="results-count"></div>
-               </div>
-               <div id="vehicle-list" class="vehicle-grid"></div>
-            </div>
-         </div>
-      </div>
-      <script src="script.js"></script>
-   </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rup Vehicle Spawner</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
