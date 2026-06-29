@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'Ruptz'
 description 'Vehicle Spawner'
-version '1.0.2'
+version '1.0.3'
 
 ui_page 'web/build/index.html'
 
